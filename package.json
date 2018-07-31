@@ -1,0 +1,11 @@
+{
+  "name": "from-null",
+  "version": "1.0.0",
+  "description": "Использование трехзвенной архитектуры с ноля",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KMishik",
+  "license": "ISC"
+}

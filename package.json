@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "KMishik",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bem-xjst": "^8.9.3"
+  }
 }

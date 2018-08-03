@@ -6,28 +6,35 @@ const fs = require('fs'),
 
 let compileBemtreeTemplate = bemtree.compile(function() {
   block('root').replace()(function() {
-    return {
-      block: 'page',
-      content: this.ctx.data.map(function(user) {
-        return {
-          block: "user",
-          content: [
-            {
-              elem: "name",
-              content: user.user
-            },
-            {
-              elem: "age",
-              content: user.age
-            },
-            {
-              elem: "money",
-              content: user.money
-            }
-          ]
-        }
-      })
-    }
+    this.data = this.ctx.data;
+    return { block: 'page' }
+  });
+
+  block('page').content()(function(){
+
+
+    return this.data.map(function(user) {
+      return { block: "user", user: user }
+    });
+
+  });
+
+  block('user').content()(function(){
+    let user = this.ctx.user;
+    return [
+      {
+        elem: "name",
+        content: user.user
+      },
+      {
+        elem: "age",
+        content: user.age
+      },
+      {
+        elem: "money",
+        content: user.money
+      }
+    ]
   });
 });
 

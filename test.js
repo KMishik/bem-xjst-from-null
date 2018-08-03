@@ -3,43 +3,36 @@ const fs = require('fs'),
       bemhtml = bemxjst.bemhtml,
       bemtree = bemxjst.bemtree;
 
-// let compileTemplate = bemhtml.compile(fs.readFileSync('index.bemhtml.js','utf8'));
 
- //let compileTemplate = require("./bundle.bemhtml").BEMHTML;
-
-let compileBemtreeTemplate = bemtree.compile('') ;
+let compileBemtreeTemplate = bemtree.compile(function() {
+  block('root').replace()(function() {
+    return {
+      block: 'page',
+      content: this.ctx.data.map(function(user) {
+        return {
+          block: "user",
+          content: [
+            {
+              elem: "name",
+              content: user.user
+            },
+            {
+              elem: "age",
+              content: user.age
+            },
+            {
+              elem: "money",
+              content: user.money
+            }
+          ]
+        }
+      })
+    }
+  });
+});
 
 let data = require('./data.json');
 
-/* let tree = function(data) {
-  return {
-    block: 'page',
-    content: data.map(function(user) {
-      return {
-        block: "user",
-        content: [
-          {
-            elem: "name",
-            content: user.user
-          },
-          {
-            elem: "age",
-            content: user.age
-          },
-          {
-            elem: "money",
-            content: user.money
-          }
-        ]
-      }
-    })
-  }
-}; */
-
-/* let html = compileTemplate.apply(tree(data));
-
-console.log(html);
- */
 
  let bemjson = compileBemtreeTemplate.apply(
    {
@@ -48,4 +41,4 @@ console.log(html);
   }
 );
 
-console.log(bemjson);
+console.log(JSON.stringify(bemjson, null, 2));

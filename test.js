@@ -4,6 +4,8 @@ const fs = require('fs'),
       bemtree = bemxjst.bemtree;
 
 
+const bemHtmlTemplate = bemhtml.compile(fs.readFileSync('./index.bemhtml.js', 'utf8'));
+
 let compileBemtreeTemplate = bemtree.compile(function() {
   block('root').replace()(function() {
     this.data = this.ctx.data;
@@ -49,3 +51,7 @@ let data = require('./data.json');
 );
 
 console.log(JSON.stringify(bemjson, null, 2));
+
+let html = bemHtmlTemplate.apply(bemjson);
+
+console.log(html);
